@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex</title>
+
+    <style>
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, system-ui, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #2c0b5e, #6610f2, #a478e6) fixed;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #app {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+        header {
+            background: rgba(44, 11, 94, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            color: #ffffff;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 0.8rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            z-index: 1001;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .hamburger {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            width: 2rem;
+            height: 2rem;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            z-index: 1000;
+        }
+
+        .hamburger span {
+            width: 1.8rem;
+            height: 0.15rem;
+            background-color: #ffffff;
+            border-radius: 4px;
+            transition: 0.3s;
+        }
+
+        header h1 {
+            margin: 0;
+            flex: 1;
+            text-align: center;
+            font-size: 1.4rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 800;
+            background: linear-gradient(90deg, #ffffff, #a478e6);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(164, 120, 230, 0.5);
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+        }
+
+        aside.sidebar {
+            width: 250px;
+            background: rgba(44, 11, 94, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-right: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            padding: 1.5rem;
+            box-sizing: border-box;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            height: 100%;
+            overflow-y: auto;
+            flex-shrink: 0;
+        }
+
+        aside.sidebar.collapsed {
+            width: 0;
+            padding: 0;
+        }
+
+        aside.sidebar ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            padding-top: 3rem;
+
+        }
+
+        aside.sidebar li {
+            margin-bottom: 1rem;
+        }
+
+        aside.sidebar a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            display: block;
+            padding: 0.9rem 1.2rem;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            border: 1px solid transparent;
+        }
+
+        aside.sidebar a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            padding-left: 1.5rem;
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        aside.sidebar a.active {
+            color: #ffffff;
+            background: linear-gradient(90deg, rgba(164, 120, 230, 0.3), rgba(102, 16, 242, 0.1));
+            border-left: 5px solid #ffffff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
+        }
+
+        main {
+            flex: 1;
+            padding: clamp(2rem, 5vh, 4rem) clamp(2rem, 5vw, 6rem);
+            overflow-y: auto;
+            background: rgba(240, 230, 255, 0.75);
+            /* Frosted Lavender glass */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            color: #1e1b4b;
+            box-shadow: -15px 0 45px rgba(0, 0, 0, 0.3);
+            height: 100%;
+            border-radius: 40px 0 0 0;
+            margin-top: 5px;
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Removed fixed offsets */
+
+        /* Flexbox handles width automatically */
+
+        footer {
+            background: rgba(44, 11, 94, 0.9);
+            backdrop-filter: blur(10px);
+            color: rgba(255, 255, 255, 0.5);
+            text-align: center;
+            padding: 1.2rem;
+            width: 100%;
+            margin-top: auto;
+            flex-shrink: 0;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .img-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 900px) {
+            .container.with-sidebar {
+                margin-left: 0;
+            }
+
+            .container.with-sidebar main {
+                width: 100%;
+            }
+
+            aside.sidebar {
+                width: 250px;
+                /* Slightly wider for mobile */
+            }
+
+            .container.with-sidebar aside.sidebar {
+                width: 250px;
+            }
+
+            .feature-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        .inference-btn {
+            background: linear-gradient(to bottom, #2c0b5e, #6610f2, #a478e6);
+            color: white !important;
+            border: none;
+            padding: clamp(0.8rem, 2vh, 1.2rem) clamp(2rem, 4vw, 3.5rem);
+            border-radius: 50px;
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+            display: inline-block;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+
+        .inference-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.5);
+            color: white !important;
+        }
+
+        .feature-card {
+            background: linear-gradient(to bottom, #2c0b5e, #6610f2, #a478e6);
+            padding: clamp(1.5rem, 3vw, 2.5rem);
+            border-radius: 14px;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            color: #ffffff;
+            height: 55%;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.35);
+        }
+
+        .feature-card h3 {
+            color: #ebecee;
+            margin-bottom: 0.8rem;
+            font-size: clamp(1.2rem, 2vw, 1.5rem);
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            font-size: clamp(0.9rem, 1.2vw, 1rem);
+            line-height: 1.6;
+            color: #06f5d1;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <header>
+            <button class="hamburger" @click="toggleSidebar" :class="{ active: isSidebarOpen }">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <h1><b>Vertex</b></h1>
+        </header>
+
+        <div class="container" :class="{ 'with-sidebar': isSidebarOpen }">
+            <aside class="sidebar" :class="{ collapsed: !isSidebarOpen }">
+                <ul>
+                    <li><a href="#" @click.prevent="switchToHome(); toggleSidebar();"
+                            :class="{ active: currentView === 'home' }">Home</a></li>
+
+                    <li><a href="#" @click.prevent="switchToInference(); toggleSidebar();"
+                            :class="{ active: currentView === 'inference' }">Model Inference</a></li>
+
+                    <li><a href="#" @click.prevent="switchToEvaluation(); toggleSidebar();"
+                            :class="{ active: currentView === 'evaluation' }">Model Evaluation</a></li>
+                    <li><a href="#" @click.prevent="switchToDataset(); toggleSidebar();"
+                            :class="{ active: currentView === 'dataset' }">Dataset Overview</a></li>
+
+                    <li><a href="#" @click.prevent="switchToDocs(); toggleSidebar();"
+                            :class="{ active: currentView === 'docs' }">Documentation</a></li>
+
+                </ul>
+            </aside>
+
+            <main>
+                <div v-if="currentView === 'home'"
+                    style="flex: 1; display: flex; align-items: flex-start; justify-content: center; padding-top: clamp(1rem, 5vh, 4rem);">
+                    <div style="text-align: center; width: 100%; max-width: 1200px;">
+                        <h2
+                            style="font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 1.5rem; color: #4338ca; font-weight: 800; line-height: 1.1;">
+                            Welcome to
+                            the Future of Autonomous Vehicle</h2>
+                        <p
+                            style="font-size: clamp(1.1rem, 1.5vw, 1.4rem); max-width: 1000px; margin: 0 auto 3rem; color: #3730a3; line-height: 1.6;">
+                            Leveraging cutting-edge YOLOv8 technology, our platform redefines object detection for
+                            autonomous vehicle environments.
+                            <br>
+                            Designed for edge deployment, the system runs efficiently on the NVIDIA Jetson SuperNano
+                            Developer Kit, ensuring low
+                            latency, high performance, and robust operation in real-world driving conditions.
+                        </p>
+
+                        <button @click="switchToInference()" class="inference-btn"
+                            style="margin-bottom: clamp(2rem, 6vh, 5rem);">
+                            Start Detection
+                        </button>
+
+                        <div class="feature-grid"
+                            style="display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(1rem, 3vw, 3rem); width: 100%; max-width: 1200px; margin: 0 auto;">
+                            <div class="feature-card">
+                                <h3>Real-time Detection</h3>
+                                <p>Low-latency processing optimized for live video streams and webcams.</p>
+                            </div>
+                            <div class="feature-card">
+                                <h3>High Precision</h3>
+                                <p>Trained on the comprehensive Indian Driving Dataset for diverse road conditions.</p>
+                            </div>
+                            <div class="feature-card">
+                                <h3>High Speed Inference</h3>
+                                <p>Deployed on NVIDIA Jetson SuperNano Developer Kit for low-latency processing.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div v-else-if="currentView === 'dev'" v-html="devContent">
+                </div>
+
+                <div v-else-if="currentView === 'inference'" v-html="inferenceContent">
+                </div>
+
+                <div v-else-if="currentView === 'dataset'" v-html="datasetContent">
+                </div>
+
+                <div v-else-if="currentView === 'evaluation'" v-html="evaluationContent">
+                </div>
+
+                <div v-else-if="currentView === 'docs'" v-html="docsContent">
+                </div>
+
+                <div v-else-if="currentView === 'imageInference'" v-html="imageInferenceContent">
+                </div>
+
+                <div v-else-if="currentView === 'videoInference'" v-html="videoInferenceContent">
+                </div>
+
+                <div v-else-if="currentView === 'webcamInference'" v-html="webcamInferenceContent">
+                </div>
+
+                <div v-else-if="currentView === 'apiInference'" v-html="apiInferenceContent">
+                </div>
+
+                <div v-else>
+                    <p>Select a page from the sidebar.</p>
+
+            </main>
+        </div>
+
+        <footer>
+            <a href="templates/dev.html"
+                style="color: white; text-decoration: none; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;"><b>Developed
+                    by Sarvesh Vengurlekar & Team</b></a>
+        </footer>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    currentView: 'home',
+                    homeContent: '',
+                    devContent: '',
+                    inferenceContent: '',
+                    datasetContent: '',
+                    evaluationContent: '',
+                    docsContent: '',
+                    imageInferenceContent: '',
+                    videoInferenceContent: '',
+                    webcamInferenceContent: '',
+                    isSidebarOpen: false
+                };
+            },
+            methods: {
+                toggleSidebar() {
+                    this.isSidebarOpen = !this.isSidebarOpen;
+                },
+
+                switchToHome() {
+                    this.currentView = 'home';
+                },
+
+                switchToDev() {
+                    if (!this.devContent) {
+                        fetch('/dev')
+                            .then(response => response.text())
+                            .then(html => {
+                                this.devContent = html;
+                            })
+                            .catch(error => {
+                                console.error('Error loading dev page:', error);
+                                this.devContent = '<p>Error loading Dev content.</p>';
+                            });
+                    }
+                    this.currentView = 'dev';
+                },
+
+                switchToDataset() {
+                    if (!this.datasetContent) {
+                        fetch('/dataset')
+                            .then(response => response.text())
+                            .then(html => {
+                                this.datasetContent = html;
+                            })
+                            .catch(error => {
+                                console.error('Error loading dataset page:', error);
+                                this.datasetContent = '<p>Error loading Dataset content.</p>';
+                            });
+                    }
+                    this.currentView = 'dataset';
+                },
+
+                switchToInference() {
+                    if (!this.inferenceContent) {
+                        fetch('/model-inference')
+                            .then(response => response.text())
+                            .then(html => {
+                                this.inferenceContent = html;
+                            })
+                            .catch(error => {
+                                console.error('Error loading inference page:', error);
+                                this.inferenceContent = '<p>Error loading Inference content.</p>';
+                            });
+                    }
+                    this.currentView = 'inference';
+                },
+
+                switchToDocs() {
+                    if (!this.docsContent) {
+                        fetch('/docs')
+                            .then(response => response.text())
+                            .then(html => {
+                                this.docsContent = html;
+                            })
+                            .catch(error => {
+                                console.error('Error loading docs page:', error);
+                                this.docsContent = '<p>Error loading Documentation content.</p>';
+                            });
+                    }
+                    this.currentView = 'docs';
+                },
+
+                switchToImageInference() {
+                    if (!this.imageInferenceContent) {
+                        fetch('/image-inference')
+                            .then(response => response.text())
+                            .then(html => {
+                                this.imageInferenceContent = html;
+                            })
+                            .catch(error => {
+                                console.error('Error loading image inference page:', error);
+                                this.imageInferenceContent = '<p>Error loading Image Inference content.</p>';
+                            });
+                    }
+                    this.currentView = 'imageInference';
+                },
+
+                switchToVideoInference() {
+                    if (!this.videoInferenceContent) {
+                        fetch('/video-inference')
+                            .then(response => response.text())
+                            .then(html => {
+                                this.videoInferenceContent = html;
+                            })
+                            .catch(error => {
+                                console.error('Error loading video inference page:', error);
+                                this.videoInferenceContent = '<p>Error loading Video Inference content.</p>';
+                            });
+                    }
+                    this.currentView = 'videoInference';
+                },
+
+                switchToWebcamInference() {
+                    if (!this.webcamInferenceContent) {
+                        fetch('/webcam-inference')
+                            .then(response => response.text())
+                            .then(html => {
+                                this.webcamInferenceContent = html;
+                            })
+                            .catch(error => {
+                                console.error('Error loading webcam inference page:', error);
+                                this.webcamInferenceContent = '<p>Error loading Webcam Inference content.</p>';
+                            });
+                    }
+                    this.currentView = 'webcamInference';
+                },
+
+                switchToApiInference() {
+                    if (!this.apiInferenceContent) {
+                        fetch('/api-inference')
+                            .then(response => response.text())
+                            .then(html => {
+                                this.apiInferenceContent = html;
+                            })
+                            .catch(error => {
+                                console.error('Error loading API inference page:', error);
+                                this.apiInferenceContent = '<p>Error loading API Inference content.</p>';
+                            });
+                    }
+                    this.currentView = 'apiInference';
+                },
+
+                switchToEvaluation() {
+                    if (!this.evaluationContent) {
+                        fetch('/evaluation')
+                            .then(response => response.text())
+                            .then(html => {
+                                this.evaluationContent = html;
+                            })
+                            .catch(error => {
+                                console.error('Error loading evaluation page:', error);
+                                this.evaluationContent = '<p>Error loading Evaluation content.</p>';
+                            });
+                    }
+                    this.currentView = 'evaluation';
+                },
+
+            }
+        }).mount('#app');
+
+        ;
+    </script>
+</body>
+
+</html>

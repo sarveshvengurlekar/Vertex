@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex</title>
+    <style>
+        body {
+            background: #ffffff;
+            color: #111010;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .dataset-card {
+            background: linear-gradient(to top, #2c0b5e, #6610f2, #a478e6);
+            border-radius: 12px;
+            padding: 24px 28px;
+            max-width: 1000px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px auto;
+            align-content: center;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #f5f5f3;
+            margin-bottom: 12px;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        .description {
+            font-size: 16px;
+            color: #06f5d1;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .link {
+            font-size: 16px;
+            color: #ebecee;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        /* Acknowledgements container */
+        .acknowledgements-section {
+            max-width: 1000px;
+            margin: 3rem auto;
+        }
+
+        /* Card */
+        .acknowledgement-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            /* Soft top + bottom shadow */
+            box-shadow:
+                0 -4px 10px rgba(0, 0, 0, 0.08),
+                0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Heading */
+        .acknowledgements-section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #ffffff;
+        }
+
+        /* Paragraph text */
+        .acknowledgements-section p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #0cdff2;
+            margin-bottom: 1rem;
+        }
+
+        /* Citation block (light code style) */
+        .citation-block {
+            background: #f4f6f8;
+            color: #1f2937;
+            padding: 1.5rem;
+            border-radius: 10px;
+
+            font-family: "JetBrains Mono", "Fira Code", monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+
+            overflow-x: auto;
+
+            border: 1px solid #e5e7eb;
+
+            box-shadow:
+                0 -2px 6px rgba(0, 0, 0, 0.06),
+                0 6px 16px rgba(0, 0, 0, 0.10);
+        }
+
+        .profile-card {
+            width: 320px;
+            background: linear-gradient(to bottom, #2c0b5e, #6610f2, #a478e6);
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 1.8rem 1.5rem;
+            text-align: center;
+
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: #ebecee;
+        }
+
+        .role {
+            font-size: 1rem;
+            opacity: 0.95;
+            margin-bottom: 1.6rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.2rem;
+        }
+
+        .social-links a {
+            background: linear-gradient(to top, #2c0b5e, #6610f2, #a478e6);
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+        }
+
+        .social-links img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .dev-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 cards per row */
+            gap: 2rem;
+            justify-items: center;
+            margin-top: 2rem;
+        }
+
+        /* Responsive: stack on small screens */
+        @media (max-width: 768px) {
+            .dev-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">
+        Dev Team
+    </h1>
+    <hr>
+
+    <section class="acknowledgements-section">
+        <div class="dev-grid">
+
+            <div class="profile-card">
+                <h2 class="name">Sarvesh Udaykumar Vengurlekar</h2>
+                <p class="role"><b>Developer</b></p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/sarvesh-vengurlekar-/" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg">
+                    </a>
+                    <a
+                        href="mailto:sarveshvengurlekarwork@gmail.com?subject=Sharing Feedback and Connection Request Regarding Vertex Platform.">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png">
+                    </a>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <h2 class="name">Riya Ramchandra Parab</h2>
+                <p class="role"><b>Developer</b></p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/riya-parab-455118241/" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg">
+                    </a>
+                    <a
+                        href="mailto:riyaramchandraparab@gmail.com?subject=Sharing Feedback and Connection Request Regarding Vertex Platform.">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png">
+                    </a>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <h2 class="name">Rushikesh Nitin Gajbe</h2>
+                <p class="role"><b>Developer</b></p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/rushikesh-gajbe-2b37932a4/" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg">
+                    </a>
+                    <a
+                        href="mailto:rushikeshgajbe026@gmail.com?subject=Sharing Feedback and Connection Request Regarding Vertex Platform.">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png">
+                    </a>
+                </div>
+            </div>
+
+            <div class="profile-card">
+                <h2 class="name">Sujal Prakash Ghadge</h2>
+                <p class="role"><b>Developer</b></p>
+                <div class="social-links">
+                    <a href="https://www.linkedin.com/in/rushikesh-gajbe-2b37932a4/" target="_blank">
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg">
+                    </a>
+                    <a
+                        href="mailto:sujalghadge2003@gmail.com?subject=Sharing Feedback and Connection Request Regarding Vertex Platform.">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4e/Gmail_Icon.png">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</body>
+
+</html>

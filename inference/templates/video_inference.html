@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vertex</title>
+
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --dark: #1e1b4b;
+            --light: rgba(255, 255, 255, 0.4);
+            --error: #ef4444;
+            --success: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: var(--dark);
+            text-align: center;
+            margin: 0 0 2rem 0;
+            font-weight: 800;
+            font-size: 2.5rem;
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: rgba(44, 11, 94, 0.1);
+            margin: 1.5rem 0;
+        }
+
+        .upload-card {
+            background: var(--light);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            text-align: center;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .dropzone {
+            border: 2px dashed rgba(99, 102, 241, 0.4);
+            border-radius: 20px;
+            padding: 4rem 1.5rem;
+            margin: 1.5rem 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropzone:hover,
+        .dropzone.active {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+            transform: scale(1.01);
+        }
+
+        .dropzone p {
+            margin: 1rem 0;
+            color: var(--dark);
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        button {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+            margin-top: 1.5rem;
+        }
+
+        button:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        button:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .status {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .status.error {
+            background: #fee2e2;
+            color: var(--error);
+        }
+
+        .status.success {
+            background: #ecfdf5;
+            color: var(--success);
+        }
+
+        .progress-container {
+            margin: 1.5rem 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 10px;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #6366f1, #a855f7, #6366f1);
+            background-size: 200% 100%;
+            animation: indeterminate 2s linear infinite;
+        }
+
+        @keyframes indeterminate {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .video-container {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .video-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .video-container h3 {
+            background: rgba(255, 255, 255, 0.5);
+            margin: 0;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.35rem;
+            color: var(--dark);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        video {
+            width: 100%;
+            height: auto;
+            display: block;
+            background: #000;
+        }
+
+        @media (max-width: 960px) {
+            .results {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Video Inference</h1>
+        <hr>
+
+        <div class="upload-card">
+            <div class="dropzone" id="dropzone">
+                <p>Drop your .mp4 video here</p>
+                <p>or click to browse</p>
+                <input type="file" id="fileInput" accept="video/mp4" hidden>
+            </div>
+            <button id="processBtn" disabled>Process Video</button>
+
+            <div class="progress-container" id="progressContainer">
+                <div class="progress-bar"></div>
+            </div>
+
+            <div class="status" id="status"></div>
+        </div>
+
+        <div class="results" id="results" style="display:none;">
+            <div class="video-container">
+                <h3>Original Video</h3>
+                <video id="preview" controls></video>
+            </div>
+
+            <div class="video-container">
+                <h3>YOLO Detection Result</h3>
+                <video id="resultVideo" controls></video>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const dropzone = document.getElementById('dropzone');
+        const fileInput = document.getElementById('fileInput');
+        const processBtn = document.getElementById('processBtn');
+        const statusEl = document.getElementById('status');
+        const progress = document.getElementById('progressContainer');
+        const results = document.getElementById('results');
+        const preview = document.getElementById('preview');
+        const resultVideo = document.getElementById('resultVideo');
+
+        let selectedFile = null;
+
+        // Click to select
+        dropzone.addEventListener('click', () => fileInput.click());
+
+        fileInput.addEventListener('change', handleFileSelect);
+
+        // Drag & drop
+        dropzone.addEventListener('dragover', e => {
+            e.preventDefault();
+            dropzone.classList.add('active');
+        });
+
+        dropzone.addEventListener('dragleave', () => {
+            dropzone.classList.remove('active');
+        });
+
+        dropzone.addEventListener('drop', e => {
+            e.preventDefault();
+            dropzone.classList.remove('active');
+            fileInput.files = e.dataTransfer.files;
+            handleFileSelect();
+        });
+
+        function handleFileSelect() {
+            statusEl.className = 'status';
+            statusEl.textContent = '';
+            results.style.display = 'none';
+
+            const file = fileInput.files[0];
+            if (!file) return;
+
+            if (!file.type.includes('mp4')) {
+                statusEl.className = 'status error';
+                statusEl.textContent = 'Please select an .mp4 video file';
+                processBtn.disabled = true;
+                return;
+            }
+
+            selectedFile = file;
+            preview.src = URL.createObjectURL(file);
+            processBtn.disabled = false;
+        }
+
+        processBtn.addEventListener('click', async () => {
+            if (!selectedFile) return;
+
+            processBtn.disabled = true;
+            statusEl.className = 'status';
+            statusEl.textContent = 'Processing video... this may take a few minutes';
+            progress.style.display = 'block';
+            results.style.display = 'none';
+
+            const formData = new FormData();
+            formData.append('video', selectedFile);
+
+            try {
+                const res = await fetch('/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await res.json();
+
+                progress.style.display = 'none';
+
+                if (data.success) {
+                    statusEl.className = 'status success';
+                    statusEl.textContent = data.message || 'Processing completed successfully!';
+                    // Set both video sources from server response
+                    preview.src = data.original_video_url;
+                    resultVideo.src = data.processed_video_url;
+                    results.style.display = 'grid';
+                    resultVideo.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    statusEl.className = 'status error';
+                    statusEl.textContent = data.error || 'Processing failed';
+                }
+            } catch (err) {
+                progress.style.display = 'none';
+                statusEl.className = 'status error';
+                statusEl.textContent = 'Network error: ' + err.message;
+            } finally {
+                processBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+
+</html>

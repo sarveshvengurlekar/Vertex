@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vertex</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            background: #ffffff;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            color: #111;
+        }
+
+        h1 {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        /* Grid layout */
+        .inference-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1000px;
+            margin: auto;
+            padding: 1rem;
+        }
+
+        /* Card */
+        .inference-card {
+            background: linear-gradient(to bottom, #2c0b5e, #6610f2, #a478e6);
+            border-radius: 14px;
+            padding: 2rem 1.8rem;
+            text-align: center;
+            color: #ffffff;
+            box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .inference-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .inference-card h2 {
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
+            color: #ebecee;
+        }
+
+        .inference-card p {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.6rem;
+            color: #06f5d1;
+        }
+
+        /* Button */
+        .inference-btn {
+            display: inline-block;
+            padding: 0.7rem 1.6rem;
+            border-radius: 8px;
+            background: #00ffc3;
+            color: #000000;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s ease, transform 0.2s ease;
+        }
+
+        .inference-btn:hover {
+            background: #b8be00;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Model Inference</h1>
+    <hr>
+
+    <section class="inference-container">
+
+        <!-- Image Inference -->
+        <div class="inference-card">
+            <h2>Image Inference</h2>
+            <p>
+                Upload an image and run object detection using the trained YOLO model.
+            </p>
+            <a href="http://127.0.0.1:5000/image-inference" class="inference-btn">Run on Image</a>
+        </div>
+
+        <!-- Video Inference -->
+        <div class="inference-card">
+            <h2>Video Inference</h2>
+            <p>
+                Upload a video file and perform frame-by-frame object detection.
+            </p>
+            <a href="/video-inference" class="inference-btn">Run on Video</a>
+        </div>
+
+        <!-- Webcam Inference -->
+        <div class="inference-card">
+            <h2>Webcam Inference</h2>
+            <p>
+                Perform real-time object detection using your system webcam.
+            </p>
+            <a href="/webcam-inference" class="inference-btn">Run Webcam</a>
+        </div>
+
+    </section>
+
+</body>
+
+</html>

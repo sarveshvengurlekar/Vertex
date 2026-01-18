@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --secondary: #a855f7;
+            --dark: #1e1b4b;
+            --light: rgba(255, 255, 255, 0.4);
+            --error: #ef4444;
+            --success: #10b981;
+        }
+
+        .upload-card {
+            background: var(--light);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.3s ease;
+        }
+
+        .dropzone {
+            border: 2px dashed rgba(99, 102, 241, 0.4);
+            border-radius: 20px;
+            padding: 3rem 1.5rem;
+            margin-bottom: 2rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+
+        .dropzone:hover,
+        .dropzone.active {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.05);
+            transform: scale(1.01);
+        }
+
+        .dropzone p {
+            margin: 0.5rem 0;
+            color: var(--dark);
+            font-size: 1.1rem;
+            pointer-events: none;
+        }
+
+        .inference-btn {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            border: none;
+            padding: 1rem 3rem;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .inference-btn:hover:not(:disabled) {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 12px 30px rgba(99, 102, 241, 0.4);
+        }
+
+        .inference-btn:disabled {
+            background: #9ca3af;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none;
+        }
+
+        .progress-container {
+            margin: 2rem 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            height: 8px;
+            overflow: hidden;
+            display: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 100%;
+            background: linear-gradient(90deg, #6366f1, #a855f7, #6366f1);
+            background-size: 200% 100%;
+            animation: move-gradient 2s linear infinite;
+        }
+
+        @keyframes move-gradient {
+            0% {
+                background-position: 200% 0;
+            }
+
+            100% {
+                background-position: -200% 0;
+            }
+        }
+
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .image-container {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .image-container:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-container h3 {
+            background: rgba(255, 255, 255, 0.5);
+            margin: 0;
+            padding: 1.5rem;
+            text-align: center;
+            font-size: 1.25rem;
+            color: var(--dark);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .detections {
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 45px rgba(0, 0, 0, 0.1);
+            margin-top: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .detections h3 {
+            color: var(--dark);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        pre {
+            background: rgba(15, 23, 42, 0.05);
+            padding: 2rem;
+            border-radius: 16px;
+            color: #1e293b;
+            font-family: 'Inter', system-ui, sans-serif;
+            font-weight: 500;
+            white-space: pre-wrap;
+            margin: 0;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .status-error {
+            background: #fee2e2;
+            color: #ef4444;
+        }
+
+        .status-processing {
+            background: #e0e7ff;
+            color: #4338ca;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1 style="text-align: center; margin-bottom: 2rem; color: #1e1b4b; font-size: 2.5rem; font-weight: 800;">Image
+            Object Detection</h1>
+
+        <div class="upload-card">
+            <div id="dropzone" class="dropzone">
+                <p style="font-size: 1.5rem; font-weight: 600;">Drag & Drop Image Here</p>
+                <p>or click to browse from gallery</p>
+                <input type="file" id="imageInput" accept="image/jpeg,image/jpg,image/png" hidden>
+            </div>
+
+            <div id="statusBadge" class="status-badge status-processing" style="display: none;">
+                ✨ Detection in Progress...
+            </div>
+
+            <div id="progressContainer" class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+
+            <button id="submitBtn" class="inference-btn" disabled>Run Inference</button>
+        </div>
+
+        <div id="errorMsg" class="status-badge status-error" style="display: none; width: 100%; text-align: center;">
+        </div>
+
+        <div id="resultsContainer" class="results" style="display: none;">
+            <div id="originalContainer" class="image-container">
+                <h3>Original Image</h3>
+                <img id="originalImg" src="" alt="Original Image">
+            </div>
+
+            <div id="resultContainer" class="image-container">
+                <h3>YOLO Prediction</h3>
+                <img id="resultImg" src="" alt="Detection Result">
+            </div>
+        </div>
+
+        <div id="detectionsCard" class="detections" style="display: none;">
+            <h3>Detections Detail:</h3>
+            <pre id="detectionsText"></pre>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            const dropzone = document.getElementById('dropzone');
+            const imageInput = document.getElementById('imageInput');
+            const submitBtn = document.getElementById('submitBtn');
+            const statusBadge = document.getElementById('statusBadge');
+            const progress = document.getElementById('progressContainer');
+            const errorMsg = document.getElementById('errorMsg');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const originalImg = document.getElementById('originalImg');
+            const resultImg = document.getElementById('resultImg');
+            const detectionsCard = document.getElementById('detectionsCard');
+            const detectionsText = document.getElementById('detectionsText');
+
+            let selectedFile = null;
+
+            if (!dropzone) return;
+
+            // Click to browse
+            dropzone.addEventListener('click', () => imageInput.click());
+
+            imageInput.addEventListener('change', (e) => {
+                handleFile(e.target.files[0]);
+            });
+
+            // Drag and drop
+            dropzone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropzone.classList.add('active');
+            });
+
+            dropzone.addEventListener('dragleave', () => {
+                dropzone.classList.remove('active');
+            });
+
+            dropzone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropzone.classList.remove('active');
+                handleFile(e.dataTransfer.files[0]);
+            });
+
+            function handleFile(file) {
+                if (!file) return;
+                if (!file.type.match('image.*')) {
+                    showError('Please select a valid image file (JPG/PNG)');
+                    return;
+                }
+                selectedFile = file;
+                submitBtn.disabled = false;
+                errorMsg.style.display = 'none';
+
+                // Show a preview hint
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    dropzone.style.backgroundImage = `url(${e.target.result})`;
+                    dropzone.style.backgroundSize = 'contain';
+                    dropzone.style.backgroundRepeat = 'no-repeat';
+                    dropzone.style.backgroundPosition = 'center';
+                    dropzone.querySelector('p').style.opacity = '0.3';
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function showError(msg) {
+                errorMsg.textContent = msg;
+                errorMsg.style.display = 'block';
+                setTimeout(() => errorMsg.style.display = 'none', 3000);
+            }
+
+            submitBtn.addEventListener('click', async () => {
+                if (!selectedFile) return;
+
+                const formData = new FormData();
+                formData.append('file', selectedFile);
+
+                submitBtn.disabled = true;
+                statusBadge.style.display = 'inline-block';
+                progress.style.display = 'block';
+                errorMsg.style.display = 'none';
+                resultsContainer.style.display = 'none';
+                detectionsCard.style.display = 'none';
+
+                try {
+                    const response = await fetch('/image-upload', {
+                        method: 'POST',
+                        body: formData
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        originalImg.src = 'data:image/jpeg;base64,' + data.original;
+                        resultImg.src = 'data:image/jpeg;base64,' + data.result;
+                        resultsContainer.style.display = 'grid';
+
+                        if (data.detections && data.detections.length > 0) {
+                            detectionsText.textContent = data.detections.join('\n');
+                            detectionsCard.style.display = 'block';
+                        }
+
+                        resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    } else {
+                        showError(data.error || 'Processing failed');
+                    }
+                } catch (error) {
+                    showError('A network error occurred');
+                } finally {
+                    submitBtn.disabled = false;
+                    statusBadge.style.display = 'none';
+                    progress.style.display = 'none';
+                }
+            });
+        })();
+    </script>
+</body>
+
+</html>

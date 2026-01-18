@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vertex</title>
+
+
+    <style>
+        body {
+            background: #ffffff;
+            color: #111010;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .dataset-card {
+            background: linear-gradient(to top, #2c0b5e, #6610f2, #a478e6);
+            border-radius: 12px;
+            padding: 24px 28px;
+            max-width: 1000px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px auto;
+            align-content: center;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fafa04;
+            margin-bottom: 12px;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        .description {
+            font-size: 16px;
+            color: #06f5d1;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .link {
+            font-size: 16px;
+            color: #ebecee;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        /* Acknowledgements container */
+        .acknowledgements-section {
+            max-width: 1000px;
+            margin: 3rem auto;
+        }
+
+        /* Card */
+        .acknowledgement-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            /* Soft top + bottom shadow */
+            box-shadow:
+                0 -4px 10px rgba(0, 0, 0, 0.08),
+                0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Heading */
+        .acknowledgements-section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+
+        /* Paragraph text */
+        .acknowledgements-section p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+
+        /* Citation block (light code style) */
+        .citation-block {
+            background: #f4f6f8;
+            color: #1f2937;
+            padding: 1.5rem;
+            border-radius: 10px;
+
+            font-family: "JetBrains Mono", "Fira Code", monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+
+            overflow-x: auto;
+
+            border: 1px solid #e5e7eb;
+
+            box-shadow:
+                0 -2px 6px rgba(0, 0, 0, 0.06),
+                0 6px 16px rgba(0, 0, 0, 0.10);
+        }
+    </style>
+</head>
+<h1 style="text-align: center;">
+    Dataset
+</h1>
+<hr>
+
+<div class="dataset-card">
+    <div class="title">
+        <span class="icon"></span>
+        <span>Indian Driving Dataset-Detections (YOLOv11)</span>
+    </div>
+
+    <p class="description">
+        Indian Driving Dataset-Detections (IDD-D) in YOLOv11 Format:
+        A comprehensive dataset for object detection, tailored for unique Indian road conditions.
+    </p>
+
+    <a class="link" href="https://www.kaggle.com/datasets/redzapdos123/indian-driving-dataset-detections-yolov11    "
+        target="_blank" rel="noopener noreferrer">
+        🔗 kaggle.com
+    </a>
+</div>
+
+<section class="acknowledgements-section">
+    <h2>Context</h2>
+    <p>
+        This dataset provides a version of the Indian Driving Dataset (IDD), specifically the Detections subset (IDD-D),
+        that
+        has been converted and optimized for training object detection models using the YOLO (You Only Look Once)
+        framework.
+    </p>
+    <p>
+        Indian roads present a unique set of challenges for autonomous navigation and computer vision, including diverse
+        vehicle
+        types not seen elsewhere, chaotic traffic, and varying environmental conditions. This dataset was prepared to
+        make it
+        easier for researchers and developers to train models like YOLO on this valuable data without needing to perform
+        the
+        conversion and restructuring themselves.
+    </p>
+    <p>
+        The original data was collected and annotated by researchers at IIIT Hyderabad. This version has been cleaned,
+        reorganized, and converted to the standard YOLO .txt format by Mridankan Mandal.
+    </p>
+</section>
+
+<section class="acknowledgements-section">
+    <h2>Content</h2>
+    <p>
+        The dataset is structured for immediate use with modern YOLO training pipelines and contains 41,962 labeled
+        images split
+        into training, validation, and test sets.
+    </p>
+    <p>
+        Key Features:
+    </p>
+    <p>
+        Optimized for YOLO: Annotations are in the normalized class x_center y_center width height format.
+        Diverse and Relevant Classes: Features 15 object classes crucial for navigating Indian roads, including
+        autorickshaw,
+        rider, and animal.
+        Structured Splits: The data is pre-split into train, val, and test directories with an approximate 80/10/10
+        ratio.
+        Ready-to-Use: Includes a data.yaml file for easy integration into your training scripts.
+        File Structure:
+    </p>
+    <p>
+        The dataset is organized as follows:
+    </p>
+    <pre class="citation-block">
+    IDDDetectionsYOLODataset/
+    ├── train/
+    │   ├── images/     (33,569 images)
+    │   └── labels/     (33,569 .txt files)
+    ├── val/        
+    │   ├── images/     (4,196 images)
+    │   └── labels/     (4,196 .txt files)
+    ├── test/       
+    │   ├── images/     (4,197 images)
+    │   └── labels/     (4,197 .txt files)
+    └── data.yaml
+    └── license.md
+    └── README.md</pre>
+    <p>
+        Classes (15 total):
+    </p>
+    <p>
+        animal, autorickshaw, bicycle, bus, car, caravan, motorcycle, person, rider, traffic light, traffic sign,
+        trailer,
+        train, truck, vehicle fallback
+    </p>
+</section>
+
+<section class="acknowledgements-section">
+    <h2>Acknowledgements</h2>
+
+    <p>
+        Full credit for the original data collection and annotation goes to the creators at
+        IIIT Hyderabad. This dataset is a derivative work prepared by Mridankan Mandal.
+    </p>
+
+    <p>
+        If you use this dataset in your research, please cite the original paper:
+    </p>
+
+    <pre class="citation-block">
+{% raw %}
+    @inproceedings{Varma_2019_WACV,
+      author    = {Varma, Girish and Subramanian, Anbumani and Namburi, Tejaswi and
+                   Namboodiri, Anoop M. and Sharma, Manju M. and Jawahar, C.V.},
+      title     = {{IDD: A Dataset for Exploring Problems of Autonomous Navigation in
+                   Unconstrained Environments}},
+      booktitle = {The IEEE Winter Conference on Applications of Computer Vision (WACV)},
+      month     = {January},
+      year      = {2019}
+    }
+{% endraw %}</pre>
+</section>
+
+
+</body>
+
+</html>

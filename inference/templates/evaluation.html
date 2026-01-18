@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex</title>
+
+    <style>
+        body {
+            background: #ffffff;
+            color: #111010;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .dataset-card {
+            background: linear-gradient(to top, #2c0b5e, #6610f2, #a478e6);
+            border-radius: 12px;
+            padding: 24px 28px;
+            max-width: 1000px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px auto;
+            align-content: center;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fafa04;
+            margin-bottom: 12px;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        .description {
+            font-size: 16px;
+            color: #06f5d1;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .link {
+            font-size: 16px;
+            color: #ebecee;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        /* Acknowledgements container */
+        .acknowledgements-section {
+            max-width: 1000px;
+            margin: 3rem auto;
+        }
+
+        /* Card */
+        .acknowledgement-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            /* Soft top + bottom shadow */
+            box-shadow:
+                0 -4px 10px rgba(0, 0, 0, 0.08),
+                0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Heading */
+        .acknowledgements-section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+
+        /* Paragraph text */
+        .acknowledgements-section p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+
+        /* Citation block (light code style) */
+        .citation-block {
+            background: #f4f6f8;
+            color: #1f2937;
+            padding: 1.5rem;
+            border-radius: 10px;
+
+            font-family: "JetBrains Mono", "Fira Code", monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+
+            overflow-x: auto;
+
+            border: 1px solid #e5e7eb;
+
+            box-shadow:
+                0 -2px 6px rgba(0, 0, 0, 0.06),
+                0 6px 16px rgba(0, 0, 0, 0.10);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1 style="text-align: center;">
+        Model Evaluation
+    </h1>
+    <hr>
+
+    <section class="acknowledgements-section">
+        <h2>Evaluation Metrics</h2>
+        <p>
+            The model was evaluated using standard metrics including Precision, Recall, and mAP (mean Average
+            Precision).
+            These metrics provide insights into the model's performance in detecting objects accurately.
+        </p>
+        <p>
+            Precision measures the accuracy of positive predictions, while Recall assesses the model's ability to find
+            all relevant instances.
+            mAP summarizes the precision-recall curve and is a common metric for object detection tasks.
+        </p>
+    </section>
+
+    <section class="acknowledgements-section">
+        <h2>Precision</h2>
+        <p>
+            It refers to the proportion of correct positive predictions (True Positives) out of all the positive
+            predictions made by
+            the model (True Positives + False Positives). It is a measure of the accuracy of the positive predictions.
+        </p>
+        <p>
+            The formula for Precision is:
+        </p>
+        <pre class="citation-block">
+            Precision = True Positives / (True Positives + False Positives)
+            </pre>
+        <p> Where:</p>
+        <ul>
+            <li><b>True Positives (TP)</b>: Correctly predicted positive instances.</li>
+            <li><b>False Positives (FP)</b>: Incorrectly predicted positive instances.</li>
+            <li><b>True Negatives (TN)</b>: Correctly predicted negative instances.</li>
+            <li><b>False Negatives (FN)</b>: Incorrectly predicted negative instances.</li>
+        </ul>
+        <img src="../static/BoxP_curve.png" alt="Precision Chart" style="max-width:100%; height:auto;">
+    </section>
+
+    <section class="acknowledgements-section">
+        <h2>Recall</h2>
+        <p>
+            It is also known as Sensitivity or True Positive Rate where we measures the proportion of actual positive
+            instances that
+            were correctly identified by the model. It is the ratio of True Positives to the total actual positives
+            (True Positives
+            + False Negatives).
+        </p>
+        <p>
+            The formula for Recall is:
+        </p>
+        <pre class="citation-block">
+            Recall = True Positives / (True Positives + False Negatives)
+            </pre>
+        <p> Where:</p>
+        <ul>
+            <li><b>True Positives (TP)</b>: Correctly predicted positive instances.</li>
+            <li><b>False Positives (FP)</b>: Incorrectly predicted positive instances.</li>
+            <li><b>True Negatives (TN)</b>: Correctly predicted negative instances.</li>
+            <li><b>False Negatives (FN)</b>: Incorrectly predicted negative instances.</li>
+        </ul>
+        <img src="../static/BoxR_curve.png" alt="Recall Chart" style="max-width:100%; height:auto;">
+    </section>
+
+    <section class="acknowledgements-section">
+        <h2>F1 Score</h2>
+        <p>
+            F1 Score is a performance metric used in machine learning to evaluate how well a classification model
+            performs on a
+            dataset especially when the classes are imbalanced meaning one class appears much more frequently than
+            another. It is
+            the harmonic mean of precision and recall which combine both metrics into a single value that balances their
+            importance.
+        </p>
+        <p>
+            The F1 Score combines precision and recall using the harmonic mean:
+        </p>
+        <pre class="citation-block">
+            F1 Score = 2 * (Precision * Recall) / (Precision + Recall)
+            </pre>
+        <p> Where:</p>
+        <ul>
+            <li><b>Precision</b>: The ratio of true positives to the sum of true positives and false positives.</li>
+            <li><b>Recall</b>: The ratio of true positives to the sum of true positives and false negatives.</li>
+        </ul>
+        <img src="../static/BoxF1_curve.png" alt="F1 Score Chart" style="max-width:100%; height:auto;">
+
+    </section>
+    <section class="acknowledgements-section">
+        <h2>Confusion Matrix</h2>
+        <p>
+            A confusion matrix is a table used to evaluate the performance of a classification model. It shows the
+            counts of true positives, false positives, true negatives, and false negatives for each class.
+        </p>
+        <img src="../static/confusion_matrix.png" alt="Confusion Matrix Chart" style="max-width:100%; height:auto;">
+    </section>
+
+    <section class="acknowledgements-section">
+        <h2>Overall Evaluation Metrics</h2>
+        <p>
+            Overall evaluation metrics provide a comprehensive view of model performance across all classes.
+        </p>
+        <img src="../static/metric_comparsion.png" alt="Overall Evaluation Metrics Chart"
+            style="max-width:100%; height:auto;">
+        <img src="../static/classwise_comparsion.png" alt="Classwise Comparison Chart"
+            style="max-width:100%; height:auto;">
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vertex</title>
+
+    <style>
+        body {
+            background: #ffffff;
+            color: #111010;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
+
+        .dataset-card {
+            background: linear-gradient(to top, #2c0b5e, #6610f2, #a478e6);
+            border-radius: 12px;
+            padding: 24px 28px;
+            max-width: 1000px;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 20px auto;
+            align-content: center;
+        }
+
+        .title {
+            display: flex;
+            align-items: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fafa04;
+            margin-bottom: 12px;
+        }
+
+        .icon {
+            margin-right: 10px;
+        }
+
+        .description {
+            font-size: 16px;
+            color: #06f5d1;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .link {
+            font-size: 16px;
+            color: #ebecee;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        /* Acknowledgements container */
+        .acknowledgements-section {
+            max-width: 1000px;
+            margin: 3rem auto;
+        }
+
+        /* Card */
+        .acknowledgement-card {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: left;
+            /* Soft top + bottom shadow */
+            box-shadow:
+                0 -4px 10px rgba(0, 0, 0, 0.08),
+                0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Heading */
+        .acknowledgements-section h2 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: #111827;
+        }
+
+        /* Paragraph text */
+        .acknowledgements-section p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #374151;
+            margin-bottom: 1rem;
+        }
+
+        /* Citation block (light code style) */
+        .citation-block {
+            background: #f4f6f8;
+            color: #1f2937;
+            padding: 1.5rem;
+            border-radius: 10px;
+
+            font-family: "JetBrains Mono", "Fira Code", monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+
+            overflow-x: auto;
+
+            border: 1px solid #e5e7eb;
+
+            box-shadow:
+                0 -2px 6px rgba(0, 0, 0, 0.06),
+                0 6px 16px rgba(0, 0, 0, 0.10);
+        }
+    </style>
+</head>
+
+<body>
+    <h1 style="text-align: center;">
+        Documentation
+    </h1>
+    <hr>
+    <section class="acknowledgements-section">
+        <h2>Image</h2>
+        <p>
+            1. Go to Image Inference Page.
+        </p>
+        <p>
+            2. Upload an image file (JPEG).
+        </p>
+        <p>
+            3. Image should be <15MB in size. </p>
+                <p>
+                    4. Click on the "Predict" button to run inference.
+                </p>
+
+                <p><b>Reference Image</b></p>
+                <a href="../static/Reference_Img.jpg" download>
+                    <img src="../static/reference_img.jpg" alt="Reference Image"
+                        style="max-width: 100%; height: auto; cursor: pointer;">
+                </a>
+    </section>
+
+    <section class="acknowledgements-section">
+        <h2>Video</h2>
+        <p>
+            1. Go to Video Inference Page.
+        </p>
+        <p>
+            2. Upload a video file (MP4).
+        </p>
+        <p>
+            3. Video should be MP4 only.
+        </p>
+        <p>
+            4. Click on the "Predict" button to run inference.
+        </p>
+        <p><b>Reference Video</b></p>
+        <video width="600" controls>
+            <source src="../static/reference_vid.mp4" type="video/mp4">
+        </video>
+
+        <br><br>
+
+        <a href="../static/reference_vid.mp4" download="evaluation_result.mp4">
+            Download Video
+        </a>
+    </section>
+
+    <section class="acknowledgements-section">
+        <h2>WebCam</h2>
+        <p>
+            1. Go to WebCam Inference Page.
+        </p>
+        <p>
+            2. Click on the "Start" button to start the webcam.
+        </p>
+        <p>
+            3. Click on the "Stop" button to stop the webcam.
+        </p>
+        <br>
+    </section>
+</body>
+
+</html>
