@@ -225,6 +225,13 @@ def serve_inference_uploads(filename):
     return send_from_directory('inference/uploads', filename)
 
 
-port = int(os.environ.get("PORT", 10000))
-app.run(host="0.0.0.0", port=port)
+if __name__ == '__main__':
+    try:
+        app.run(
+            host='0.0.0.0',
+            debug=False
+        )
+    finally:
+        # Clean up OpenCV on shutdown
+        cv2.destroyAllWindows()
 
