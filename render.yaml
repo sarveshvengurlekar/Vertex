@@ -1,0 +1,6 @@
+services:
+  - type: web
+    name: Vertex
+    envVars:
+      - key: PORT
+        value: 8080
