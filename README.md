@@ -2,6 +2,9 @@
 
 Vertex is a cutting-edge object detection platform designed for autonomous vehicle environments. Leveraging the power of **YOLOv8** and optimized for edge deployment on the **NVIDIA Jetson SuperNano Developer Kit**, Vertex provides real-time, high-precision detection of road objects.
 
+
+![Project Preview](inference/static/Home_page.png)
+
 ## 🚀 Features
 
 - **Real-Time Detection**: Low-latency processing optimized for live video streams.
