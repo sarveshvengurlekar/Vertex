@@ -1,7 +1,0 @@
-services:
-  - type: web
-    name: Vertex        # Any name you choose
-    runtime: python            # MUST be exactly 'python'
-    plan: free                 # Or your preferred plan
-    buildCommand: pip install -r requirements.txt
-    startCommand: gunicorn app:app --bind 0.0.0.0:$PORT
