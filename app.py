@@ -229,9 +229,10 @@ if __name__ == '__main__':
     try:
         app.run(
             host='0.0.0.0',
-            port=5000,
-            debug=True
+            port=4000,
+            debug=False
         )
     finally:
         # Clean up OpenCV on shutdown
         cv2.destroyAllWindows()
+
