@@ -11,7 +11,7 @@ model = YOLO("model/20_best.pt")
 
 def image_validator(file_stream):
     """
-    Validate JPEG/JPG image under 15MB (in-memory)
+    Validate JPEG/JPG/PNG image under 15MB (in-memory)
     """
     if not file_stream:
         return False, "No file provided"
@@ -29,8 +29,8 @@ def image_validator(file_stream):
 
     try:
         img = Image.open(io.BytesIO(file_bytes))
-        if img.format not in ("JPEG", "JPG"):
-            return False, f"This is a {img.format} image, not JPEG/JPG"
+        if img.format not in ("JPEG", "JPG", "PNG"):
+            return False, f"This is a {img.format} image, not JPEG/JPG/PNG"
         return True, "Valid image"
     except Exception as e:
         return False, f"Invalid image: {str(e)}"
