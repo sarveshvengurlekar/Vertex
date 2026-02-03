@@ -6,7 +6,7 @@ from PIL import Image
 from ultralytics import YOLO
 
 # Load model once (module-level, efficient)
-model = YOLO("model/20_best.pt")
+model = YOLO("model/best.pt")
 
 
 def image_validator(file_stream):

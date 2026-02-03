@@ -5,7 +5,7 @@ from ultralytics import YOLO
 from werkzeug.utils import secure_filename
 
 # Load model once
-model = YOLO("model/20_best.pt")  # change path if needed
+model = YOLO("model/best.pt")  # change path if needed
 
 def run_video_detection(file_storage, upload_dir, processed_dir, conf=0.25):
     """
