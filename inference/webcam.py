@@ -5,7 +5,7 @@ import threading
 import time
 
 class WebcamManager:
-    def __init__(self, model_path="model/best.pt"):
+    def __init__(self, model_path="model/40best.pt"):
         self.model = YOLO(model_path)
         self.cap = None
         self.is_running = False
@@ -50,7 +50,8 @@ class WebcamManager:
                 source=frame,
                 conf=0.25,
                 iou=0.7,
-                verbose=False
+                verbose=False,
+                device=0
             )
 
             # 3. Result frame
