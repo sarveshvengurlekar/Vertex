@@ -20,7 +20,7 @@ Vertex is a cutting-edge object detection platform designed for autonomous vehic
   - **Webcam Inference**: Live detection using connected cameras.
 
 
-- **Relevant Dataset Training**: Trained on the comprehensive Indian Driving Dataset (IDD) for diverse road conditions.
+- **Relevant Dataset Training**: Trained on the Custom Dataset for diverse road conditions.
 - **Model Evaluation**: Built-in tools for evaluating model performance.
 - **User-Friendly Interface**: Modern, responsive UI built with **Flask** and **Vue.js**.
 
