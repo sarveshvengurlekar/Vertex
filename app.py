@@ -34,7 +34,7 @@ app.config['PROCESSED_FOLDER'] = PROCESSED_FOLDER
 app.config['MAX_CONTENT_LENGTH'] = 1500 * 1024 * 1024  # 1.5 GB for videos
 
 # Load YOLO model once at startup
-model = YOLO("model/40best.pt")
+model = YOLO("model/20best.pt")
 
 # ========== Helper Functions ==========
 

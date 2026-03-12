@@ -119,47 +119,25 @@
 <div class="dataset-card">
     <div class="title">
         <span class="icon"></span>
-        <span>Indian Driving Dataset-Detections (YOLOv11)</span>
+        <span>Custom Dataset</span>
     </div>
 
     <p class="description">
-        Indian Driving Dataset-Detections (IDD-D) in YOLOv11 Format:
-        A comprehensive dataset for object detection, tailored for unique Indian road conditions.
+
     </p>
 
-    <a class="link" href="https://www.kaggle.com/datasets/redzapdos123/indian-driving-dataset-detections-yolov11    "
+    <a class="link" href="https://universe.roboflow.com/rushi-ng2so/mydata-aqn38/dataset/9"
         target="_blank" rel="noopener noreferrer">
-        🔗 kaggle.com
+        🔗 Roboflow.com
     </a>
 </div>
 
-<section class="acknowledgements-section">
-    <h2>Context</h2>
-    <p>
-        This dataset provides a version of the Indian Driving Dataset (IDD), specifically the Detections subset (IDD-D),
-        that
-        has been converted and optimized for training object detection models using the YOLO (You Only Look Once)
-        framework.
-    </p>
-    <p>
-        Indian roads present a unique set of challenges for autonomous navigation and computer vision, including diverse
-        vehicle
-        types not seen elsewhere, chaotic traffic, and varying environmental conditions. This dataset was prepared to
-        make it
-        easier for researchers and developers to train models like YOLO on this valuable data without needing to perform
-        the
-        conversion and restructuring themselves.
-    </p>
-    <p>
-        The original data was collected and annotated by researchers at IIIT Hyderabad. This version has been cleaned,
-        reorganized, and converted to the standard YOLO .txt format by Mridankan Mandal.
-    </p>
-</section>
+
 
 <section class="acknowledgements-section">
     <h2>Content</h2>
     <p>
-        The dataset is structured for immediate use with modern YOLO training pipelines and contains 41,962 labeled
+        The dataset is structured for immediate use with modern YOLO training pipelines and contains 12,913 labeled
         images split
         into training, validation, and test sets.
     </p>
@@ -171,7 +149,7 @@
         Diverse and Relevant Classes: Features 15 object classes crucial for navigating Indian roads, including
         autorickshaw,
         rider, and animal.
-        Structured Splits: The data is pre-split into train, val, and test directories with an approximate 80/10/10
+        Structured Splits: The data is pre-split into train, val, and test directories with an approximate 70/20/10
         ratio.
         Ready-to-Use: Includes a data.yaml file for easy integration into your training scripts.
         File Structure:
@@ -182,53 +160,26 @@
     <pre class="citation-block">
     IDDDetectionsYOLODataset/
     ├── train/
-    │   ├── images/     (33,569 images)
-    │   └── labels/     (33,569 .txt files)
+    │   ├── images/     (11,809 images)
+    │   └── labels/     (11,809 .txt files)
     ├── val/        
-    │   ├── images/     (4,196 images)
-    │   └── labels/     (4,196 .txt files)
+    │   ├── images/     (736 images)
+    │   └── labels/     (736 .txt files)
     ├── test/       
-    │   ├── images/     (4,197 images)
-    │   └── labels/     (4,197 .txt files)
+    │   ├── images/     (368 images)
+    │   └── labels/     (368 .txt files)
     └── data.yaml
-    └── license.md
-    └── README.md</pre>
+    └── README.dataset.txt
+    └── README.roboflow.txt</pre>
     <p>
-        Classes (15 total):
+        Classes (16 total):
     </p>
-    <p>
-        animal, autorickshaw, bicycle, bus, car, caravan, motorcycle, person, rider, traffic light, traffic sign,
-        trailer,
-        train, truck, vehicle fallback
+        car, truck, bus, motorcycle, 
+        pothole, building, bridge, animal, 
+        rickshaw, person, traffic signal, street light, 
+        road barrier, road sign board, trees, zebra crossing
     </p>
 </section>
-
-<section class="acknowledgements-section">
-    <h2>Acknowledgements</h2>
-
-    <p>
-        Full credit for the original data collection and annotation goes to the creators at
-        IIIT Hyderabad. This dataset is a derivative work prepared by Mridankan Mandal.
-    </p>
-
-    <p>
-        If you use this dataset in your research, please cite the original paper:
-    </p>
-
-    <pre class="citation-block">
-{% raw %}
-    @inproceedings{Varma_2019_WACV,
-      author    = {Varma, Girish and Subramanian, Anbumani and Namburi, Tejaswi and
-                   Namboodiri, Anoop M. and Sharma, Manju M. and Jawahar, C.V.},
-      title     = {{IDD: A Dataset for Exploring Problems of Autonomous Navigation in
-                   Unconstrained Environments}},
-      booktitle = {The IEEE Winter Conference on Applications of Computer Vision (WACV)},
-      month     = {January},
-      year      = {2019}
-    }
-{% endraw %}</pre>
-</section>
-
 
 </body>
 
