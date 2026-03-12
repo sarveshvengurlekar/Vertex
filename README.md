@@ -1,10 +1,15 @@
 # Vertex - Autonomous Vehicle Object Detection
 
-Vertex is a cutting-edge object detection platform designed for autonomous vehicle environments. Leveraging the power of **YOLOv8** and optimized for edge deployment on the **NVIDIA Jetson SuperNano Developer Kit**, Vertex provides real-time, high-precision detection of road objects.
+Vertex is a cutting-edge object detection platform designed for autonomous vehicle environments. Leveraging the power of **YOLOv8**. It provides real-time, high-precision detection of road objects.
 
-
+## **Home Page**
 ![Project Preview](inference/static/Home_page.png)
 
+## **Model Inference Page**
+![Model Inference](inference/static/Model_Inference.png)
+
+## **Image Inference Page**
+![Image Inference](inference/static/Image_Inference.png)
 
 ## 🚀 Features
 
@@ -25,7 +30,6 @@ Vertex is a cutting-edge object detection platform designed for autonomous vehic
 - **Frontend**: HTML5, CSS3, Vue.js
 - **Computer Vision**: OpenCV, Ultralytics YOLOv8
 - **Machine Learning**: PyTorch
-- **Deployment Endpoint**: NVIDIA Jetson SuperNano (Target)
 
 ## 📋 Installation
 
@@ -55,7 +59,7 @@ Vertex is a cutting-edge object detection platform designed for autonomous vehic
 2. **Access the Dashboard**
    Open your web browser and navigate to:
    ```
-   http://localhost:5000
+   http://localhost:4000
    ```
 
 3. **Navigate the Interface**
